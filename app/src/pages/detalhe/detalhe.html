@@ -12,14 +12,24 @@
     <ion-card-content>
       <ion-card-title [ngStyle]="{'text-decoration': tarefa.checked ? 'line-through' : 'none' }">
         {{tarefa.title}}
+        <br />
+        <div style="text-align: center">
+          <img style="max-width: 150px; display: inline-block" [src]="tarefa.foto" *ngIf="tarefa.foto" />
+        </div>
       </ion-card-title>
     </ion-card-content>
 
     <ion-row no-padding>
       <ion-col>
         <button ion-button clear small (click)="marcar()" icon-left>
-          <ion-icon name='star'></ion-icon>
+          <ion-icon name='checkmark'></ion-icon>
           {{ tarefa.checked ? 'Des' : '' }}marcar
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small (click)="tirarFoto()" icon-left>
+          <ion-icon name='camera'></ion-icon>
+          Foto
         </button>
       </ion-col>
       <ion-col text-right>
