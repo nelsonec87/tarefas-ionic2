@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TarefaService, Tarefa } from '../../services/tarefa.service';
 import { AlertController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -9,14 +10,16 @@ import { AlertController } from 'ionic-angular';
   providers: [TarefaService]
 })
 export class TarefasPage {
-  items: Tarefa[];
+  items: Observable<Tarefa[]>;
 
   constructor(private tarefaService: TarefaService, public alertCtrl: AlertController) {
-    this.items = tarefaService.getItens();
+    this.items = tarefaService.get();
   }
 
-  itemTapped(event, item) {
-    item.checked = !item.checked;
+  itemTapped(tarefa) {
+    console.log('linha')
+    tarefa.checked = !tarefa.checked;
+    this.tarefaService.update(tarefa.id, tarefa).subscribe();
   }
 
   addTarefa() {
@@ -28,8 +31,8 @@ export class TarefasPage {
         {
           text: 'Savar',
           handler: data => {
-            this.tarefaService.addTafera({ title: data.tarefa, checked: false });
-            this.items = this.tarefaService.getItens();
+            this.tarefaService.add({ title: data.tarefa, checked: false })
+              .subscribe(() => this.items = this.tarefaService.get());
           }
         }
       ]
@@ -38,8 +41,9 @@ export class TarefasPage {
     prompt.present();
   }
 
-  removerTarefa(tarefa: Tarefa) {
-    this.tarefaService.removerTarefa(tarefa);
-    this.items = this.tarefaService.getItens();
+  removerTarefa(ev, tarefa: Tarefa) {
+    this.tarefaService.remove(tarefa.id)
+      .subscribe(() => this.items = this.tarefaService.get());
+    ev.stopPropagation();
   }
 }
