@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { TarefaService, Tarefa } from '../../services/tarefa.service';
-import { AlertController } from 'ionic-angular';
+import { AlertController, NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
+import { DetalhePage } from '../detalhe/detalhe';
 
 
 @Component({
@@ -12,14 +13,20 @@ import { Observable } from 'rxjs/Observable';
 export class TarefasPage {
   items: Observable<Tarefa[]>;
 
-  constructor(private tarefaService: TarefaService, public alertCtrl: AlertController) {
-    this.items = tarefaService.get();
+  constructor(private tarefaService: TarefaService, public alertCtrl: AlertController, public navCtrl: NavController) { }
+
+  ionViewWillEnter() {
+    this.items = this.tarefaService.get();
   }
 
   itemTapped(tarefa) {
-    console.log('linha')
     tarefa.checked = !tarefa.checked;
     this.tarefaService.update(tarefa.id, tarefa).subscribe();
+  }
+
+  detalhe(ev, tarefa: Tarefa) {
+    this.navCtrl.push(DetalhePage, { tarefa: tarefa });
+    ev.stopPropagation();
   }
 
   addTarefa() {
