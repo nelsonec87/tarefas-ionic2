@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Login FB</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <button ion-button (click)="logar()" icon-left>
+          <ion-icon name='facebook'></ion-icon>
+          Logar
+        </button>
+
+  <br />
+  <br />
+
+  <pre>{{loginResponse|json}}</pre>
+  <img *ngIf="perfil?.picture?.data?.url" [src]="perfil?.picture?.data?.url" /> <span>{{perfil?.name}}</span>
+  <pre>{{perfil|json}}</pre>
+
+
+</ion-content>

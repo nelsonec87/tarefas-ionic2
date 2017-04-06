@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { TarefasPage } from '../pages/tarefas/tarefas';
+import { FacebookPage } from '../pages/facebook/facebook';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class MyApp {
 
   rootPage: any = TarefasPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform) {
     this.initializeApp();
@@ -21,6 +22,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Minhas Tarefas', component: TarefasPage },
+      { title: 'Facebook', component: FacebookPage },
     ];
 
   }
