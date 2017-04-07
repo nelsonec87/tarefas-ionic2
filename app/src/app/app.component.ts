@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { TarefasPage } from '../pages/tarefas/tarefas';
 import { FacebookPage } from '../pages/facebook/facebook';
+import { GooglePage } from '../pages/google/google';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class MyApp {
     this.pages = [
       { title: 'Minhas Tarefas', component: TarefasPage },
       { title: 'Facebook', component: FacebookPage },
+      { title: 'Google', component: GooglePage },
     ];
 
   }

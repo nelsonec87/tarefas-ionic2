@@ -4,13 +4,15 @@ import { MyApp } from './app.component';
 import { TarefasPage } from '../pages/tarefas/tarefas';
 import { DetalhePage } from '../pages/detalhe/detalhe';
 import { FacebookPage } from '../pages/facebook/facebook';
+import { GooglePage } from '../pages/google/google';
 
 @NgModule({
   declarations: [
     MyApp,
     TarefasPage,
     DetalhePage,
-    FacebookPage
+    FacebookPage,
+    GooglePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,7 +22,8 @@ import { FacebookPage } from '../pages/facebook/facebook';
     MyApp,
     TarefasPage,
     DetalhePage,
-    FacebookPage
+    FacebookPage,
+    GooglePage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
 })

@@ -14,8 +14,7 @@ export class FacebookPage {
   loginResponse: FacebookLoginResponse;
   perfil: any;
 
-  constructor(private fb: Facebook, private navParams: NavParams, public navCtrl: NavController) {
-  }
+  constructor(private fb: Facebook, private navParams: NavParams, public navCtrl: NavController) { }
 
   logar() {
     this.fb.login(this.permissoes)
@@ -25,6 +24,14 @@ export class FacebookPage {
           this.perfil = o;
         });
       }).catch(e => console.log('Erro', e));
+  }
+
+  sair() {
+    this.fb.logout()
+      .then(() => {
+        this.perfil = undefined;
+        this.loginResponse = undefined;
+      }).catch(e => console.log('erro', e));
   }
 
 }
