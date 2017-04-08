@@ -6,9 +6,12 @@ import { TarefasPage } from '../pages/tarefas/tarefas';
 import { FacebookPage } from '../pages/facebook/facebook';
 import { GooglePage } from '../pages/google/google';
 
+import { CodePush } from '@ionic-native/code-push';
+declare var InstallMode: any;
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [CodePush]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -17,7 +20,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, private codePush: CodePush) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -35,6 +38,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+
+      setInterval(() => {
+        this.codePush.sync({ installMode: InstallMode.IMMEDIATE })
+          .subscribe(status => console.log('status', status));
+      }, 5000);
+
     });
   }
 
