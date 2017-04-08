@@ -9,9 +9,11 @@ import { GooglePage } from '../pages/google/google';
 import { CodePush } from '@ionic-native/code-push';
 declare var InstallMode: any;
 
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 @Component({
   templateUrl: 'app.html',
-  providers: [CodePush]
+  providers: [CodePush, LocalNotifications]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -20,7 +22,7 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, private codePush: CodePush) {
+  constructor(public platform: Platform, private codePush: CodePush, private localNotifications: LocalNotifications) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -43,6 +45,22 @@ export class MyApp {
         this.codePush.sync({ installMode: InstallMode.IMMEDIATE })
           .subscribe(status => console.log('status', status));
       }, 5000);
+
+      this.localNotifications.schedule({
+        id: 1,
+        text: 'Notificação simples',
+        data: { chave: 'teste' }
+      });
+
+      this.localNotifications.schedule({
+        text: 'Notificação com atraso',
+        at: new Date(new Date().getTime() + 10000),
+      });
+
+      this.localNotifications.on('click', notification => {
+        console.log('Clicou na notificação:', notification);
+      });
+
 
     });
   }

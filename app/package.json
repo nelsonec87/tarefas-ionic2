@@ -23,6 +23,7 @@
     "@ionic-native/core": "^3.4.4",
     "@ionic-native/facebook": "^3.4.4",
     "@ionic-native/google-plus": "^3.4.4",
+    "@ionic-native/local-notifications": "^3.4.4",
     "@ionic/storage": "1.1.7",
     "ionic-angular": "2.0.0",
     "ionic-native": "2.4.1",
